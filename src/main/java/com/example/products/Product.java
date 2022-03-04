@@ -3,6 +3,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Scanner;
+
 @Getter
 @Setter
 public abstract class Product {
@@ -34,5 +36,7 @@ public abstract class Product {
     }
 
     public abstract String getDetailedData();
+
+    public abstract boolean setDetailedData(Scanner scanner);
 
 }

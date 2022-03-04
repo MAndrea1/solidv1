@@ -67,31 +67,34 @@ public class UserInterface {
     private void selectProduct() {
         System.out.println("Product id:");
         int productID = Integer.parseInt(scanner.nextLine());
-        System.out.println(inventory.getProduct(productID));
-        System.out.println("1- Change product stock");
-        System.out.println("2- Get details");
-        System.out.println("3- Remove product from inventory");
-        System.out.println("4- return to main menu");
+        System.out.println(inventory.getProduct(productID).getDetailedData());
         int option;
-        option = Integer.parseInt(scanner.nextLine());
-        switch (option){
-            case 1:
-                System.out.println("Quantity: " + inventory.getProductStock(productID));
-                System.out.print("New quantity:");
-                int newQuantity = Integer.parseInt(scanner.nextLine());
-                inventory.setProductStock(productID, newQuantity);
-                System.out.println("");
-                break;
-            case 2:
-                System.out.println(inventory.getProductData(productID));
-                break;
-            case 3:
-                inventory.removeProduct(productID);
-                break;
-            case 4:
-                return;
-            default:
-                break;
+
+        while (true) {
+            System.out.println("1- Change product stock");
+            System.out.println("2- Update product data");
+            System.out.println("3- Remove product from inventory");
+            System.out.println("0- return to main menu");
+            option = Integer.parseInt(scanner.nextLine());
+            switch (option){
+                case 1:
+                    System.out.println("Quantity: " + inventory.getProductStock(productID));
+                    System.out.print("New quantity:");
+                    int newQuantity = Integer.parseInt(scanner.nextLine());
+                    inventory.setProductStock(productID, newQuantity);
+                    System.out.println("");
+                    break;
+                case 2:
+                    inventory.getProduct(productID).setDetailedData(scanner);
+                    break;
+                case 3:
+                    inventory.removeProduct(productID);
+                    break;
+                case 0:
+                    return;
+                default:
+                    break;
+            }
         }
     }
 
