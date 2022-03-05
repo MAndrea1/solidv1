@@ -3,10 +3,15 @@ package com.example.principal;
 import com.example.products.Inventory;
 import com.example.products.NewProduct;
 import com.example.products.Product;
+import com.example.utilidades.SendMail;
 
+import javax.mail.MessagingException;
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 import static com.example.utilidades.CreateRepoprt.createReport;
+import static com.example.utilidades.SendMail.sendMail;
 
 public class UserInterface {
     Inventory inventory;
@@ -102,10 +107,24 @@ public class UserInterface {
         System.out.println("Write file name: ");
         String filename = scanner.nextLine() + ".pdf";
         createReport(filename, inventory.getAllInventory());
+        System.out.println("File created");
     }
 
     private void generateEmail() {
-        //TODO generate email
+        try {
+            System.out.println("Username: ");
+            String username = scanner.nextLine();
+            System.out.println("Password: ");
+            String password = scanner.nextLine();
+
+            File file = createReport("report.pdf", inventory.getAllInventory());
+            sendMail(file, username, password);
+        } catch (MessagingException e) {
+            System.out.println("Email couldn't be sent");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

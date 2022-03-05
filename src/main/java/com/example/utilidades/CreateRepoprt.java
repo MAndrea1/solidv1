@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class CreateRepoprt {
 
-    public static void createReport(String fileName, String fileBody) {
+    public static File createReport(String fileName, String fileBody) {
         try {
             File fichero = new File(fileName);
 
@@ -28,12 +28,14 @@ public class CreateRepoprt {
             pdfWriter.close();
             pdfDocument.close();
 
-            System.out.println("File created");
+            return fichero;
+
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }
