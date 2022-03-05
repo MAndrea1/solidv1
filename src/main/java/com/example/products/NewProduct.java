@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class NewProduct {
 
+    private NewProduct() {}
+
     public static Product newProduct(Scanner scanner) {
         System.out.println("Which type of product you'd like to add?");
         System.out.println("1- Home Appliance");

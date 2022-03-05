@@ -1,7 +1,5 @@
 package com.example.utilidades;
 
-import com.example.products.Inventory;
-
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.File;
@@ -9,14 +7,11 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Properties;
 
-import static com.example.utilidades.CreateRepoprt.createReport;
-
 public class SendMail {
     private static String username;
     private static String password;
     private Properties properties;
     private Session session;
-    private MimeMessage mimeMessage;
 
     public static void sendMail(File file, String user, String pass) throws MessagingException, IOException {
         username = user;
@@ -46,7 +41,7 @@ public class SendMail {
     }
 
     private void createMimeMessage(File file) throws MessagingException, IOException {
-        mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(session);
         mimeMessage.setFrom(new InternetAddress("reports@thestore.com"));
         mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse("usermail@gmail.com"));
         mimeMessage.setSubject("Inventory report");

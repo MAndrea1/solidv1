@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Inventory {
     //map to mock database
-    Map<Product, Integer> inventory = new HashMap<>();
+    Map<Product, Integer> inventoryList = new HashMap<>();
     Map<Integer, Product> catalogue = new HashMap<>();
 
     //Helper inner class to call single instance of the Inventory class
@@ -33,43 +33,30 @@ public class Inventory {
         return catalogue.get(id);
     }
 
-    public String getProductData(int id) {
-        return catalogue.get(id).getDetailedData();
-    }
-
     public void addProduct(Product product, int quantity) {
-        inventory.put(product, quantity);
+        inventoryList.put(product, quantity);
         catalogue.put(product.getId(), product);
     }
 
     public void removeProduct(int id) {
         Product product = catalogue.get(id);
-        inventory.remove(product);
+        inventoryList.remove(product);
         catalogue.remove(id);
     }
 
     public void setProductStock(int id, int quantity) {
         Product product = catalogue.get(id);
-        inventory.put(product, quantity);
+        inventoryList.put(product, quantity);
     }
 
     public int getProductStock(int id) {
         Product product = catalogue.get(id);
-        return inventory.get(product);
-    }
-
-    public String getAllProducts() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Product product : catalogue.values()) {
-            stringBuilder.append(product.getData());
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
+        return inventoryList.get(product);
     }
 
     public String getAllInventory() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<Product, Integer> entry: inventory.entrySet()) {
+        for (Map.Entry<Product, Integer> entry: inventoryList.entrySet()) {
             stringBuilder.append(entry.getKey().getData());
             stringBuilder.append("\nquantity: ");
             stringBuilder.append(entry.getValue());

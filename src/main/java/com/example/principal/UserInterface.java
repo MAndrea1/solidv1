@@ -3,8 +3,6 @@ package com.example.principal;
 import com.example.products.Inventory;
 import com.example.products.NewProduct;
 import com.example.products.Product;
-import com.example.utilidades.SendMail;
-
 import javax.mail.MessagingException;
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +31,7 @@ public class UserInterface {
     
     public void start() {
         int option;
-        do {
+        while (true) {
             mainMenu();
             option = Integer.parseInt(scanner.nextLine());
             switch (option){
@@ -57,7 +55,7 @@ public class UserInterface {
                 default:
                     break;
             }
-        } while (option != 0);
+        }
     }
 
     private void addNewProduct(){
@@ -87,7 +85,7 @@ public class UserInterface {
                     System.out.print("New quantity:");
                     int newQuantity = Integer.parseInt(scanner.nextLine());
                     inventory.setProductStock(productID, newQuantity);
-                    System.out.println("");
+                    System.out.println();
                     break;
                 case 2:
                     inventory.getProduct(productID).setDetailedData(scanner);
@@ -126,6 +124,4 @@ public class UserInterface {
             e.printStackTrace();
         }
     }
-
-
 }

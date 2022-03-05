@@ -11,6 +11,8 @@ import java.io.IOException;
 
 public class CreateRepoprt {
 
+    private CreateRepoprt(){}
+
     public static File createReport(String fileName, String fileBody) {
         try {
             File fichero = new File(fileName);

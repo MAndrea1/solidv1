@@ -37,6 +37,6 @@ public abstract class Product {
 
     public abstract String getDetailedData();
 
-    public abstract boolean setDetailedData(Scanner scanner);
+    public abstract void setDetailedData(Scanner scanner);
 
 }
