@@ -3,6 +3,9 @@ package com.example.principal;
 import com.example.products.Inventory;
 import com.example.products.NewProduct;
 import com.example.products.Product;
+import com.example.utilidades.CheckValid;
+
+import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
 import java.io.File;
 import java.io.IOException;
@@ -21,38 +24,42 @@ public class UserInterface {
     }
 
     static void mainMenu(){
-        System.out.println("1- Agregar nuevo producto al inventario");
-        System.out.println("2- Mostrar todos los productos");
-        System.out.println("3- Seleccionar producto");
-        System.out.println("4- Generar archivo pdf");
-        System.out.println("5- E-Mail");
-        System.out.println("0- Salir");
+        System.out.println("1- Add new product");
+        System.out.println("2- Show all products");
+        System.out.println("3- Select product");
+        System.out.println("4- Generate report");
+        System.out.println("5- E-Mail report");
+        System.out.println("0- Exit");
     }
     
     public void start() {
-        int option;
+        System.out.println("  --- Welcome ---");
+        System.out.println("Please choose an option.");
+        System.out.println();
+        String option;
         while (true) {
             mainMenu();
-            option = Integer.parseInt(scanner.nextLine());
+            option = scanner.nextLine();
             switch (option){
-                case 1:
+                case "1":
                     addNewProduct();
                     break;
-                case 2:
+                case "2":
                     System.out.println(inventory.getAllInventory());
                     break;
-                case 3:
+                case "3":
                     selectProduct();
                     break;
-                case 4:
+                case "4":
                     generateReport();
                     break;
-                case 5:
+                case "5":
                     generateEmail();
                     break;
-                case 0:
+                case "0":
                     return;
                 default:
+                    System.out.println("Please choose again");
                     break;
             }
         }
@@ -68,32 +75,38 @@ public class UserInterface {
     }
 
     private void selectProduct() {
-        System.out.println("Product id:");
-        int productID = Integer.parseInt(scanner.nextLine());
+        int productID;
+        while (true) {
+            productID = CheckValid.validInt(scanner);
+            if (inventory.validID(productID)) {
+                break;
+            }
+        }
+
         System.out.println(inventory.getProduct(productID).getDetailedData());
-        int option;
+        String option;
 
         while (true) {
             System.out.println("1- Change product stock");
             System.out.println("2- Update product data");
             System.out.println("3- Remove product from inventory");
             System.out.println("0- return to main menu");
-            option = Integer.parseInt(scanner.nextLine());
+            option = scanner.nextLine();
             switch (option){
-                case 1:
+                case "1":
                     System.out.println("Quantity: " + inventory.getProductStock(productID));
                     System.out.print("New quantity:");
-                    int newQuantity = Integer.parseInt(scanner.nextLine());
+                    int newQuantity = CheckValid.validInt(scanner);
                     inventory.setProductStock(productID, newQuantity);
                     System.out.println();
                     break;
-                case 2:
+                case "2":
                     inventory.getProduct(productID).setDetailedData(scanner);
                     break;
-                case 3:
+                case "3":
                     inventory.removeProduct(productID);
                     break;
-                case 0:
+                case "0":
                     return;
                 default:
                     break;
@@ -118,8 +131,7 @@ public class UserInterface {
             File file = createReport("report.pdf", inventory.getAllInventory());
             sendMail(file, username, password);
         } catch (MessagingException e) {
-            System.out.println("Email couldn't be sent");
-            e.printStackTrace();
+            System.out.println("Email couldn't be sent. Please check your username and password.");
         } catch (IOException e) {
             e.printStackTrace();
         }

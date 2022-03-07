@@ -1,5 +1,6 @@
 package com.example.products;
 
+import com.example.utilidades.CheckValid;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,7 +40,7 @@ public class DesignFurniture extends Product{
                     break;
                 case 2:
                     System.out.print("Price: ");
-                    setPrice(Double.parseDouble(scanner.nextLine()));
+                    setPrice(CheckValid.validDouble(scanner));
                     break;
                 case 3:
                     System.out.print("Color: ");

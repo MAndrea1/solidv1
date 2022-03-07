@@ -33,6 +33,10 @@ public class Inventory {
         return catalogue.get(id);
     }
 
+    public boolean validID(int id) {
+        return catalogue.containsKey(id);
+    }
+
     public void addProduct(Product product, int quantity) {
         inventoryList.put(product, quantity);
         catalogue.put(product.getId(), product);
