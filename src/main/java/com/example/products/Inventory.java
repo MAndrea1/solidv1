@@ -62,7 +62,7 @@ public class Inventory {
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<Product, Integer> entry: inventoryList.entrySet()) {
             stringBuilder.append(entry.getKey().getData());
-            stringBuilder.append("\nquantity: ");
+            stringBuilder.append(" - quantity: ");
             stringBuilder.append(entry.getValue());
             stringBuilder.append("\n");
         }

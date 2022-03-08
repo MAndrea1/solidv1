@@ -5,8 +5,8 @@ import com.example.products.NewProduct;
 import com.example.products.Product;
 import com.example.utilidades.CheckValid;
 
-import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -75,37 +75,32 @@ public class UserInterface {
     }
 
     private void selectProduct() {
-        int productID;
-        while (true) {
-            productID = CheckValid.validInt(scanner);
-            if (inventory.validID(productID)) {
-                break;
-            }
+        int productID = CheckValid.validInt(scanner, "Product id: ");
+        if (!inventory.validID(productID)) {
+            System.out.println("Product not found.\n");
+            return;
         }
-
-        System.out.println(inventory.getProduct(productID).getDetailedData());
-        String option;
-
         while (true) {
+            System.out.println(inventory.getProduct(productID).getDetailedData());
+            System.out.println("Stock: " + inventory.getProductStock(productID) + "\n");
             System.out.println("1- Change product stock");
             System.out.println("2- Update product data");
             System.out.println("3- Remove product from inventory");
             System.out.println("0- return to main menu");
-            option = scanner.nextLine();
+            String option = scanner.nextLine();
             switch (option){
                 case "1":
-                    System.out.println("Quantity: " + inventory.getProductStock(productID));
-                    System.out.print("New quantity:");
-                    int newQuantity = CheckValid.validInt(scanner);
+                    System.out.println("Stock: " + inventory.getProductStock(productID));
+                    int newQuantity = CheckValid.validInt(scanner, "New quantity: ");
                     inventory.setProductStock(productID, newQuantity);
-                    System.out.println();
                     break;
                 case "2":
                     inventory.getProduct(productID).setDetailedData(scanner);
                     break;
                 case "3":
                     inventory.removeProduct(productID);
-                    break;
+                    System.out.println("Product " + productID + " removed.\n");
+                    return;
                 case "0":
                     return;
                 default:
@@ -125,15 +120,22 @@ public class UserInterface {
         try {
             System.out.println("Username: ");
             String username = scanner.nextLine();
-            System.out.println("Password: ");
-            String password = scanner.nextLine();
+
+            //doesn't work in IDE
+            Console console = System.console();
+            char[] ch = console.readPassword("Password : ");
+            String password = String.valueOf(ch);
+
+            //For testing in IDE
+//            System.out.println("Password: ");
+//            String password = scanner.nextLine();
 
             File file = createReport("report.pdf", inventory.getAllInventory());
             sendMail(file, username, password);
         } catch (MessagingException e) {
             System.out.println("Email couldn't be sent. Please check your username and password.");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Email couldn't be sent");
         }
     }
 }

@@ -34,11 +34,11 @@ public class NewProduct {
         System.out.println("Product name:");
         String name = scanner.nextLine();
 
-        double price = CheckValid.validDouble(scanner);
+        double price = CheckValid.validDouble(scanner, "Product price");
 
         int id;
         while (true) {
-            id = CheckValid.validInt(scanner);
+            id = CheckValid.validInt(scanner, "Product id: ");
             if (!Inventory.getInstance().validID(id)) {
                 break;
             }
@@ -62,11 +62,11 @@ public class NewProduct {
         System.out.println("Product name:");
         String name = scanner.nextLine();
 
-        double price = CheckValid.validDouble(scanner);
+        double price = CheckValid.validDouble(scanner, "Product price");
 
         int id;
         while (true) {
-            id = CheckValid.validInt(scanner);
+            id = CheckValid.validInt(scanner, "Product id: ");
             if (!Inventory.getInstance().validID(id)) {
                 break;
             }

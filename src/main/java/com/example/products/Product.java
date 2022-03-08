@@ -23,7 +23,7 @@ public abstract class Product {
     }
 
     public String getData() {
-        return name + "   - id: " + id + "   - price: " + price;
+        return "\n" + name + "\nID: " + id + " - Price: " + price;
     }
 
     @Override

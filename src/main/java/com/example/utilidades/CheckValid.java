@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class CheckValid {
 
-    public static int validInt(Scanner scanner) {
+    public static int validInt(Scanner scanner, String query) {
         int i;
         while(true) {
             try {
-                System.out.println("Product id: ");
+                System.out.println(query);
                 i = Integer.parseInt(scanner.nextLine());
                 break;
             }
@@ -20,11 +20,11 @@ public class CheckValid {
         return i;
     }
 
-    public static double validDouble(Scanner scanner) {
+    public static double validDouble(Scanner scanner, String query) {
         double d;
         while(true) {
             try {
-                System.out.println("Product price");
+                System.out.println(query);
                 d = Double.parseDouble(scanner.nextLine());
                 break;
             }
