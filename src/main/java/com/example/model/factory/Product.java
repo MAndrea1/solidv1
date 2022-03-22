@@ -1,4 +1,4 @@
-package com.example.products;
+package com.example.model.factory;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +15,10 @@ public abstract class Product {
 
     private String name;
     private Double price;
+    private String type;
 
-    protected Product(int id, String name, Double price) {
+    protected Product(int id) {
         this.id = id;
-        this.name = name;
-        this.price = price;
     }
 
     public String getData() {
@@ -36,7 +35,4 @@ public abstract class Product {
     }
 
     public abstract String getDetailedData();
-
-    public abstract void setDetailedData(Scanner scanner);
-
 }

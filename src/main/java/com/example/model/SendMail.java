@@ -1,4 +1,4 @@
-package com.example.utilidades;
+package com.example.model;
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -13,13 +13,22 @@ public class SendMail {
     private Properties properties;
     private Session session;
 
-    public static void sendMail(File file, String user, String pass) throws MessagingException, IOException {
+    public static int sendMail(File file, String user, String pass) {
         username = user;
         password = pass;
         SendMail sendMail = new SendMail();
         sendMail.configureProperties();
         sendMail.configureSession();
-        sendMail.createMimeMessage(file);
+        try {
+            sendMail.createMimeMessage(file);
+        } catch (MessagingException e) {
+            return -1;
+//            e.printStackTrace();
+        } catch (IOException e) {
+            return -2;
+//            e.printStackTrace();
+        }
+        return 0;
     }
 
     private void configureProperties() {

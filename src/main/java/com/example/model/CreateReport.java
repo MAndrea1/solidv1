@@ -1,4 +1,4 @@
-package com.example.utilidades;
+package com.example.model;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -9,9 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class CreateRepoprt {
+public class CreateReport {
 
-    private CreateRepoprt(){}
+    private CreateReport(){}
 
     public static File createReport(String fileName, String fileBody) {
         try {

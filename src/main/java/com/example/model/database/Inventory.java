@@ -1,20 +1,19 @@
-package com.example.products;
+package com.example.model.database;
+
+import com.example.model.factory.DesignFurniture;
+import com.example.model.factory.HomeAppliance;
+import com.example.model.factory.Product;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Inventory {
+public class Inventory implements InventoryInt {
     //map to mock database
-    Map<Product, Integer> inventoryList = new HashMap<>();
-    Map<Integer, Product> catalogue = new HashMap<>();
-
-    //Helper inner class to call single instance of the Inventory class
-    private static class SingleInventory {
-        public static final Inventory instance = new Inventory();
-    }
+    Map<Product, Integer> inventoryList = new HashMap<>(); //Product / Quantity
+    Map<Integer, Product> catalogue = new HashMap<>(); // ProductID / Product
 
     //Private constructor cannot be called from outside the class
-    private Inventory() {
+    public Inventory() {
         //mock products
         addProduct(new HomeAppliance(1001, "Blender", 150.00, "Red", "BL01", "Lindell"), 40);
         addProduct(new HomeAppliance(1002, "Toaster", 50.00, "White", "TS50", "Frez&Co"), 20);
@@ -22,11 +21,6 @@ public class Inventory {
         addProduct(new HomeAppliance(1004, "Hand Mixer", 150.00, "Silver", "HM15", "Lindell"), 50);
         addProduct(new DesignFurniture(2001, "Desk", 650.00, "Black", "Melamine"), 5);
         addProduct(new DesignFurniture(2002, "Couch", 1500.00, "Brown", "Fabric"), 2);
-    }
-
-    //Public getInstance method to call the single instance from outside the class
-    public static Inventory getInstance() {
-        return SingleInventory.instance;
     }
 
     public Product getProduct(int id) {
@@ -59,6 +53,7 @@ public class Inventory {
     }
 
     public String getAllInventory() {
+        System.out.println("getting inventory");
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<Product, Integer> entry: inventoryList.entrySet()) {
             stringBuilder.append(entry.getKey().getData());

@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="solidv1" />
+        <module name="SOLID project v2" />
       </profile>
     </annotationProcessing>
   </component>
