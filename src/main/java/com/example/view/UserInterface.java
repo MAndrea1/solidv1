@@ -83,4 +83,8 @@ public class UserInterface extends ControlledUI{
     public void successful() {
         System.out.println("Operation successful");
     }
+
+    public void displayProduct(String string) {
+        System.out.println(string);
+    }
 }

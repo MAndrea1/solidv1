@@ -32,6 +32,7 @@ public class Inventory implements InventoryInt {
     }
 
     public void addProduct(Product product, int quantity) {
+        if (product == null) {return;}
         inventoryList.put(product, quantity);
         catalogue.put(product.getId(), product);
     }
@@ -50,6 +51,10 @@ public class Inventory implements InventoryInt {
     public int getProductStock(int id) {
         Product product = catalogue.get(id);
         return inventoryList.get(product);
+    }
+
+    public Map<Product, Integer> getInventoryList(){
+        return inventoryList;
     }
 
     public String getAllInventory() {

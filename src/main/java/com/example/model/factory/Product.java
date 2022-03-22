@@ -25,6 +25,10 @@ public abstract class Product {
         return "\n" + name + "\nID: " + id + " - Price: " + price;
     }
 
+    public abstract String[] getAttributes();
+
+    public abstract String[] getAttributesHeader();
+
     @Override
     public String toString() {
         return "Product {" +
@@ -33,6 +37,4 @@ public abstract class Product {
                 ", price=" + price +
                 '}';
     }
-
-    public abstract String getDetailedData();
 }
