@@ -59,15 +59,15 @@ public class HomeApplianceSetter extends FactorySetter{
         homeAppliance.setPrice(factoryDialogue.getProductPrice());
     }
 
-    private void getColor() {
+    public void getColor() {
         homeAppliance.setColor(factoryDialogue.getProductColor());
     }
 
-    private void getModel() {
+    public void getModel() {
         homeAppliance.setModel(factoryDialogue.getProductModel());
     }
 
-    private void getBrand() {
+    public void getBrand() {
         homeAppliance.setBrand(factoryDialogue.getProductBrand());
     }
 
