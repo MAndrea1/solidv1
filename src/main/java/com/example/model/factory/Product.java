@@ -21,10 +21,6 @@ public abstract class Product {
         this.id = id;
     }
 
-    public String getData() {
-        return "\n" + name + "\nID: " + id + " - Price: " + price;
-    }
-
     public abstract String[] getAttributes();
 
     public abstract String[] getAttributesHeader();

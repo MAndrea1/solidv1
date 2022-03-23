@@ -31,7 +31,7 @@ public class FactoryDialogue {
     }
 
     public String getProductName() {
-        System.out.println("Product Name: ");
+        System.out.println("Product name: ");
         return CheckValid.validString();
     }
 

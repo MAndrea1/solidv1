@@ -41,14 +41,16 @@ public class Controller implements Mediator{
     private void handleShowMenu(String event) {
         switch (event) {
             case "1":
-                Product product = factoryController.startFactory();
+                int id = handleValidateID(false);
+                if (id == 0) {return;}
+                Product product = factoryController.startFactory(id);
                 inventory.addProduct(product, userInterface.enterQuantity());
                 break;
             case "2":
                 userInterface.displayProduct(Formatter.formatInventory((Inventory) inventory));
                 break;
             case "3":
-                if (!handleValidateID()) {return;}
+                if (handleValidateID(true) == 0) {return;}
                 userInterface.displayProduct(Formatter.formatProduct(inventory.getProduct(productID)));
                 userInterface.selectProduct();
                 break;
@@ -97,17 +99,25 @@ public class Controller implements Mediator{
         userInterface.selectProduct();
     }
 
-    private boolean handleValidateID() {
+    private int handleValidateID(boolean b) {
         while (true) {
             int id = userInterface.validateIdUI();
             if(id == 0) {
-                return false;
+                return 0;
             }
-            if(inventory.validID(id)) {
-                productID = id;
-                return true;
+            if (b) {
+                if(inventory.validID(id)) {
+                    productID = id;
+                    return id;
+                }
+                userInterface.validateIdUINeg(id);
             }
-            userInterface.validateIdUINeg(id);
+            else {
+                if(!inventory.validID(id) && !b) {
+                    return id;
+                }
+                userInterface.validateIdRepeated(id);
+            }
         }
     }
 

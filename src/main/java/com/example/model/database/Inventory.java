@@ -56,18 +56,5 @@ public class Inventory implements InventoryInt {
     public Map<Product, Integer> getInventoryList(){
         return inventoryList;
     }
-
-    public String getAllInventory() {
-        System.out.println("getting inventory");
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<Product, Integer> entry: inventoryList.entrySet()) {
-            stringBuilder.append(entry.getKey().getData());
-            stringBuilder.append(" - quantity: ");
-            stringBuilder.append(entry.getValue());
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
-
 }
 

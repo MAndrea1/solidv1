@@ -80,6 +80,10 @@ public class UserInterface extends ControlledUI{
         System.out.println(id + " is not a valid id");
     }
 
+    public void validateIdRepeated(int id) {
+        System.out.println(id + " is already being used");
+    }
+
     public void successful() {
         System.out.println("Operation successful");
     }

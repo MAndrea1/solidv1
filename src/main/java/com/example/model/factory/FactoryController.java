@@ -10,10 +10,9 @@ public class FactoryController {
         this.factoryDialogue = new FactoryDialogue();
     }
 
-    public Product startFactory() {
+    public Product startFactory(int id) {
         int option = factoryDialogue.getProductType();
         if (option == 0) {return null;}
-        int id = factoryDialogue.getProductID();
         switch (option) {
             case 1:
                 factorySetter = new FurnitureSetter(id);

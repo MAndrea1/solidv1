@@ -54,11 +54,11 @@ public class FurnitureSetter extends FactorySetter {
         designFurniture.setPrice(factoryDialogue.getProductPrice());
     }
 
-    private void getColor() {
+    public void getColor() {
         designFurniture.setColor(factoryDialogue.getProductColor());
     }
 
-    private void getMaterial() {
+    public void getMaterial() {
         designFurniture.setMaterial(factoryDialogue.getProductMaterial());
     }
 
