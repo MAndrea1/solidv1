@@ -1,13 +1,10 @@
 package com.example.model.factory;
 
-import com.example.model.factory.Product;
-import com.example.view.CheckValid;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Scanner;
-
-@Getter @Setter
+@Getter @Setter @EqualsAndHashCode
 public class HomeAppliance extends Product {
     private String color;
     private String model;
@@ -28,7 +25,7 @@ public class HomeAppliance extends Product {
         return new String[]{"Color", "Model", "Brand"};
     }
 
-    //For mocking the database
+    //For mocking the database and testing
     public HomeAppliance(int id, String name, double price, String color, String model, String brand) {
         super(id);
         super.setName(name);
