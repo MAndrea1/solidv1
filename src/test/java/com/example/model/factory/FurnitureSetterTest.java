@@ -2,6 +2,8 @@ package com.example.model.factory;
 
 import static org.junit.Assert.*;
 import java.io.*;
+
+import com.example.view.CheckValid;
 import org.junit.*;
 
 public class FurnitureSetterTest {
@@ -43,7 +45,7 @@ public class FurnitureSetterTest {
 
         assertEquals(optionMenu, getOutput().replaceAll("\r", ""));
         assertEquals("Rounded Table", furnitureSetter.returnProduct().getName());
-        assertEquals(String.valueOf(1000.00), String.valueOf(furnitureSetter.returnProduct().getPrice()));
+        assertEquals(1000.00, furnitureSetter.returnProduct().getPrice(), 0);
         assertEquals("Dark Brown", furnitureSetter.returnProduct().getAttributes()[0]);
         assertEquals("Oak", furnitureSetter.returnProduct().getAttributes()[1]);
         restoreSystemInputOutput();
@@ -105,7 +107,7 @@ public class FurnitureSetterTest {
         String optionMenu = "Product price: \n";
 
         assertEquals(optionMenu, getOutput().replaceAll("\r", ""));
-        assertEquals(String.valueOf(7777.77), String.valueOf(furnitureSetter.returnProduct().getPrice()));
+        assertEquals(7777.77, furnitureSetter.returnProduct().getPrice(), 0);
         restoreSystemInputOutput();
     }
 

@@ -12,7 +12,6 @@ public class Inventory implements InventoryInt {
     Map<Product, Integer> inventoryList = new HashMap<>(); //Product / Quantity
     Map<Integer, Product> catalogue = new HashMap<>(); // ProductID / Product
 
-    //Private constructor cannot be called from outside the class
     public Inventory() {
         //mock products
         addProduct(new HomeAppliance(1001, "Blender", 150.00, "Red", "BL01", "Lindell"), 40);
@@ -41,6 +40,11 @@ public class Inventory implements InventoryInt {
         Product product = catalogue.get(id);
         inventoryList.remove(product);
         catalogue.remove(id);
+    }
+
+    public void removeAll() {
+        inventoryList.clear();
+        catalogue.clear();
     }
 
     public void setProductStock(int id, int quantity) {

@@ -18,10 +18,10 @@ public class FurnitureSetter extends FactorySetter {
     @Override
     void modifyAttributes() {
         while (true) {
-            factoryDialogue.modifyProductName(1);
-            factoryDialogue.modifyProductPrice(2);
-            factoryDialogue.modifyProductColor(3);
-            factoryDialogue.modifyProductMaterial(4);
+            factoryDialogue.modifyProduct(1, "Name");
+            factoryDialogue.modifyProduct(2, "Price");
+            factoryDialogue.modifyProduct(3, "Color");
+            factoryDialogue.modifyProduct(4, "Material");
             int option = factoryDialogue.changeAttributeDialogue();
             switch (option) {
                 case 0:

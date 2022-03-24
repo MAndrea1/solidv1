@@ -19,11 +19,11 @@ public class HomeApplianceSetter extends FactorySetter{
     @Override
     void modifyAttributes() {
         while (true) {
-            factoryDialogue.modifyProductName(1);
-            factoryDialogue.modifyProductPrice(2);
-            factoryDialogue.modifyProductColor(3);
-            factoryDialogue.modifyProductModel(4);
-            factoryDialogue.modifyProductBrand(5);
+            factoryDialogue.modifyProduct(1, "Name");
+            factoryDialogue.modifyProduct(2, "Price");
+            factoryDialogue.modifyProduct(3, "Color");
+            factoryDialogue.modifyProduct(4, "Model");
+            factoryDialogue.modifyProduct(5, "Brand");
             int option = factoryDialogue.changeAttributeDialogue();
             switch (option) {
                 case 0:

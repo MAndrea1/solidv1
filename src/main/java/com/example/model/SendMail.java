@@ -70,7 +70,6 @@ public class SendMail {
 
         mimeMessage.setContent(multipart);
         Transport.send(mimeMessage);
-        System.out.println("Email sent");
     }
 
 

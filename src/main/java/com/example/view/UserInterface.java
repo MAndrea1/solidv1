@@ -54,9 +54,9 @@ public class UserInterface extends ControlledUI{
         StringBuilder stringBuilder = new StringBuilder();
         System.out.println("Username: ");
         stringBuilder.append(CheckValid.validString());
+        stringBuilder.append(" ");
         System.out.println("Password: ");
         stringBuilder.append(CheckValid.validString());
-        stringBuilder.append(" ");
         return stringBuilder.toString();
     }
 
@@ -67,7 +67,7 @@ public class UserInterface extends ControlledUI{
 
     public int enterQuantity() {
         System.out.println("Enter quantity: ");
-        return CheckValid.validInt();
+        return CheckValid.validPositiveInt();
     }
 
     public int validateIdUI() {
@@ -90,5 +90,17 @@ public class UserInterface extends ControlledUI{
 
     public void displayProduct(String string) {
         System.out.println(string);
+    }
+
+    public void mailSendResult(int sent) {
+        if (sent == 0) {
+            System.out.println("Email sent successfully.");
+        }
+        if (sent == -1) {
+            System.out.println("Email couldn't be sent. Please check username and password.");
+        }
+        if (sent == -2) {
+            System.out.println("Email couldn't be sent.");
+        }
     }
 }
