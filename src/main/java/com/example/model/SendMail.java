@@ -6,8 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Properties;
+import org.apache.log4j.Logger;
 
 public class SendMail {
+    private static Logger logger = Logger.getLogger(SendMail.class);
     private static String username;
     private static String password;
     private Properties properties;
@@ -21,12 +23,13 @@ public class SendMail {
         sendMail.configureSession();
         try {
             sendMail.createMimeMessage(file);
+            logger.info("E-mail sent");
         } catch (MessagingException e) {
+            logger.error("MessagingException error at sendMail", e);
             return -1;
-//            e.printStackTrace();
         } catch (IOException e) {
+            logger.error("IOException at sendMail", e);
             return -2;
-//            e.printStackTrace();
         }
         return 0;
     }

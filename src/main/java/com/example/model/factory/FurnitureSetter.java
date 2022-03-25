@@ -1,9 +1,13 @@
 package com.example.model.factory;
+import org.apache.log4j.Logger;
 
 public class FurnitureSetter extends FactorySetter {
     DesignFurniture designFurniture;
+    private static Logger logger = Logger.getLogger(FurnitureSetter.class);
+
 
     FurnitureSetter(int id) {
+        logger.debug("Creating new Design Furniture");
         this.designFurniture = new DesignFurniture(id);
         getName();
         getPrice();
@@ -46,24 +50,29 @@ public class FurnitureSetter extends FactorySetter {
 
     @Override
     public void getName() {
+        logger.debug("Setting new Name");
         designFurniture.setName(factoryDialogue.getProductName());
     }
 
     @Override
     public void getPrice() {
+        logger.debug("Setting new Price");
         designFurniture.setPrice(factoryDialogue.getProductPrice());
     }
 
     public void getColor() {
+        logger.debug("Setting new Color");
         designFurniture.setColor(factoryDialogue.getProductColor());
     }
 
     public void getMaterial() {
+        logger.debug("Setting new Material");
         designFurniture.setMaterial(factoryDialogue.getProductMaterial());
     }
 
     @Override
     public Product returnProduct() {
+        logger.debug("Returning Design Furniture");
         return designFurniture;
     }
 }

@@ -9,10 +9,12 @@ import com.example.view.UserInterface;
 import com.example.model.database.Inventory;
 import com.example.model.database.Format;
 import com.example.view.CheckValid;
+import org.apache.log4j.Logger;
 
-import java.util.Arrays;
+
 
 public class Controller implements Mediator{
+    private static Logger logger = Logger.getLogger(Controller.class);
     UserInterface userInterface;
     InventoryInt inventory;
     FactoryController factoryController;
@@ -27,11 +29,13 @@ public class Controller implements Mediator{
     }
 
     public void start(){
+        logger.debug("Starting Controller");
         userInterface.start();
     }
 
     @Override
     public void notify(String sender, String event) {
+        logger.debug("Recived sender " + sender + ", event " + event);
         switch (sender) {
             case"showMenu":
                 handleShowMenu(event);
@@ -45,29 +49,39 @@ public class Controller implements Mediator{
     }
 
     private void handleShowMenu(String event) {
+        logger.debug("Handling ShowMenu options");
         switch (event) {
             case "1":
+                logger.debug("Option 1: Add new product");
                 int id = handleNotValidID();
-                if (id == 0) {return;}
+                if (id == 0) {
+                    logger.debug("Add new product cancelled by user");
+                    return;}
                 Product product = factoryController.startFactory(id);
                 inventory.addProduct(product, userInterface.enterQuantity());
                 break;
             case "2":
+                logger.debug("Option 2: Show all products");
                 userInterface.displayProduct(formatter.formatInventory((Inventory) inventory));
                 break;
             case "3":
+                logger.debug("Option 3: Select product");
                 int validID = handleValidID();
-                if (validID == 0) {return;};
+                if (validID == 0) {
+                    logger.debug("Select product cancelled by user");
+                    return;};
                 productID = validID;
                 userInterface.displayProduct(formatter.formatProduct(inventory.getProduct(productID)));
                 userInterface.selectProduct();
                 break;
             case "4":
+                logger.debug("Option 4: Generate report");
                 String filename = userInterface.generateReport();
                 String content = formatter.formatInventory((Inventory) inventory);
                 CreateReport.createReport(filename, content);
                 break;
             case "5":
+                logger.debug("Option 5: E-mail report");
                 String[] data = userInterface.generateEmail().split(" ");
                 int sent = SendMail.sendMail(CreateReport.createReport("report.pdf", formatter.formatInventory((Inventory) inventory)), data[0], data[1]);
                 userInterface.mailSendResult(sent);
@@ -79,17 +93,21 @@ public class Controller implements Mediator{
     }
 
     private void handleSelectProduct(String event) {
+        logger.debug("Handling SelectProduct options");
         switch (event) {
             case "1":
+                logger.debug("Option 1: Change product stock");
                 int quantity = userInterface.enterQuantity();
                 inventory.setProductStock(productID, quantity);
                 userInterface.successful();
                 userInterface.selectProduct();
                 break;
             case "2":
+                logger.debug("Option 2: Update product data");
                 factoryController.modifyProduct(inventory.getProduct(productID));
                 break;
             case "3":
+                logger.debug("Option 3: Remove product from inventory");
                 if (userInterface.confirm()) {
                     inventory.removeProduct(productID);
                     userInterface.successful();
@@ -125,6 +143,7 @@ public class Controller implements Mediator{
     }
 
     private void exit() {
+        logger.debug("Exit program");
         CheckValid.closeScanner();
         System.exit(0);
     }

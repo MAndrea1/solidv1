@@ -6,8 +6,11 @@ import com.example.model.factory.Product;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.log4j.Logger;
 
 public class Inventory implements InventoryInt {
+    private static Logger logger = Logger.getLogger(Inventory.class);
+
     //map to mock database
     Map<Product, Integer> inventoryList = new HashMap<>(); //Product / Quantity
     Map<Integer, Product> catalogue = new HashMap<>(); // ProductID / Product
@@ -34,22 +37,27 @@ public class Inventory implements InventoryInt {
         if (product == null) {return;}
         inventoryList.put(product, quantity);
         catalogue.put(product.getId(), product);
+        logger.info("Added new product: " + product + ", stock: " + quantity);
     }
 
     public void removeProduct(int id) {
         Product product = catalogue.get(id);
+        logger.info("Attempting to remove product: " + product);
         inventoryList.remove(product);
         catalogue.remove(id);
+        logger.info("Product removed successfully");
     }
 
     public void removeAll() {
         inventoryList.clear();
         catalogue.clear();
+        logger.info("All items removed from inventory");
     }
 
     public void setProductStock(int id, int quantity) {
         Product product = catalogue.get(id);
         inventoryList.put(product, quantity);
+        logger.info("Stock from product " + product + "changed to " + quantity);
     }
 
     public int getProductStock(int id) {

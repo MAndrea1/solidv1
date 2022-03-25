@@ -1,6 +1,5 @@
 package com.example.view;
 
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public final class CheckValid {
